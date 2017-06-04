@@ -72,8 +72,9 @@
 
 	<build>
 	
-		<defaultGoal>compile</defaultGoal>
+	<defaultGoal>compile</defaultGoal>
 
+	
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -83,26 +84,32 @@
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>spring-boot-maven-plugin</artifactId> 
+                
+                <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                    </goals>
+                    <!--可以生成不含依赖包的不可执行Jar包-->
+                    <!-- configuration>
+                      <classifier>exec</classifier>
+                    </configuration> -->
+                </execution>
+            </executions>
+                
             </plugin>
-            <plugin>
+              <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.demo.boot.ApplicationBoot</mainClass><!-- 入口程序 -->
+                            <mainClass>com.example.demo.boot.ApplicationBoot</mainClass>入口程序
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
