@@ -1,5 +1,8 @@
 package com.example.demo.boot;
 
+/**
+ * 启动 
+ */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
