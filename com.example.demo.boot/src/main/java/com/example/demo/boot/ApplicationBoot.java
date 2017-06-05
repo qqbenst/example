@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.example.demo"})
 public class ApplicationBoot {
+	//
 	 public static void main(String[] args) throws Exception {
 	        SpringApplication.run(ApplicationBoot.class, args);
 	    }
