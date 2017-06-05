@@ -1,7 +1,6 @@
 package com.example.demo.boot;
-
 /**
- * 启动 
+ * dsfsdfsdfsdfsd
  */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
