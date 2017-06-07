@@ -13,5 +13,20 @@
   		<artifactId>com.example.demo.web</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.example.demo</groupId>
+  		<artifactId>com.example.demo.config</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.example.demo</groupId>
+  		<artifactId>com.example.demo.daoImp</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.example.demo</groupId>
+  		<artifactId>com.example.demo.serviceImp</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies> 
 </project>

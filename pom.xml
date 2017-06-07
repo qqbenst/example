@@ -52,6 +52,16 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- srping end -->
+		
+		<!-- 数据库 -->
+
+<!-- 		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency> -->
+	
+		<!-- 数据库 结束-->
 
 
 		<!-- tools start -->
@@ -114,6 +124,16 @@
 					</archive>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
