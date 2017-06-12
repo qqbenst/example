@@ -8,4 +8,7 @@ public interface UserDao {
 	
 	UserModel selectById(long id);
 	
+	void updateById(UserModel userModel);
+	
+	void deleteById(long id);
 }

@@ -15,12 +15,27 @@ public class UserDaoImp implements UserDao{
 	
 	@Override
 	public void insert(UserModel model) {
-		// TODO Auto-generated method stub
+		model.setCtime(System.currentTimeMillis());
+		model.setUtime(model.getCtime());
+		userMapper.insert(model);
 		
 	}
 
 	@Override
 	public UserModel selectById(long id) {
 		return userMapper.selectById(id);
+	}
+
+	@Override
+	public void updateById(UserModel model) {
+		model.setCtime(System.currentTimeMillis());
+		userMapper.updateById(model);
+		
+	}
+
+	@Override
+	public void deleteById(long id) {
+		userMapper.deleteById(id);
+		
 	}
 }

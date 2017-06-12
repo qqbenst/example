@@ -1,6 +1,5 @@
 package com.example.demo.serviceImp;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +7,8 @@ import com.example.demo.dao.UserDao;
 import com.example.demo.dao.model.UserModel;
 import com.example.demo.service.UserService;
 import com.example.demo.service.bean.UserBean;
+
+import net.sf.cglib.beans.BeanCopier;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -22,8 +23,44 @@ public class UserServiceImp implements UserService {
 			return null;
 		}
 		UserBean userBean = new UserBean();
-		BeanUtils.copyProperties(userModel, userBean);
+		BeanCopier b = BeanCopier.create(UserModel.class, UserBean.class, false);		
+		b.copy(userModel, userBean, null);
 		return userBean;
+	}
+
+	@Override
+	public UserBean save(UserBean bean) {
+		UserModel userModel = new UserModel();
+		// bean.setUtime(System.currentTimeMillis());日期更新应该有dao层管理
+		BeanCopier b = BeanCopier.create(UserBean.class, UserModel.class, false);
+		b.copy(bean, userModel, null);
+		userDao.insert(userModel);
+		bean.setId(userModel.getId());
+		b = BeanCopier.create(UserModel.class, UserBean.class, false);
+		b.copy(userModel, bean, null);
+
+		return bean;
+	}
+
+	@Override
+	public void remove(Long id) {
+		userDao.deleteById(id);
+		return ;
+	}
+
+	@Override
+	public UserBean modify(UserBean bean) {
+		//TODO 这个逻辑应该要处理，举个例子，应该先查询校验，再进行bean赋值 
+		UserModel userModel = new UserModel();
+		// bean.setUtime(System.currentTimeMillis());日期更新应该有dao层管理
+		BeanCopier b = BeanCopier.create(UserBean.class, UserModel.class, false);
+		b.copy(bean, userModel, null);
+		userDao.updateById(userModel);
+		bean.setId(userModel.getId());
+		b = BeanCopier.create(UserModel.class, UserBean.class, false);
+		b.copy(userModel, bean, null);
+		
+		return bean;
 	}
 
 }

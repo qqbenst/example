@@ -52,24 +52,41 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- srping end -->
-		
+
 		<!-- 数据库 -->
 
-<!-- 		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency> -->
-	
-		<!-- 数据库 结束-->
+		<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
+			<version>0.9.1.2</version> </dependency> -->
 
-
+		<!-- 数据库 结束 -->
+		
+		<!-- 待归类  -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+		<!-- 待归类   -->
+		
 		<!-- tools start -->
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- 生产环境应该要把此去掉 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
 		</dependency>
 		<!-- tools end -->
 	</dependencies>

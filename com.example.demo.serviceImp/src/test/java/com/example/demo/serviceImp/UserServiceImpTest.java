@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.serviceImp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.example.demo.ApplicationBoot;
 import com.example.demo.service.UserService;
 import com.example.demo.service.bean.UserBean;
-import com.example.demo.serviceImp.ApplicationBoot;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes=ApplicationBoot.class)
