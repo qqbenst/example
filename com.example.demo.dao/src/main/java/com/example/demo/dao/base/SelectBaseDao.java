@@ -4,16 +4,18 @@ import java.util.List;
 
 public interface SelectBaseDao<T> {
 	
-	T selectByPrimaryKey(Object primaryKey) throws Exception;
+	T selectByPrimaryKey(Object primaryKey);
 	
-	List<T> selectByPrimaryKeys(Object ...primaryKey) throws Exception;
+	List<T> selectByPrimaryKeys(Object ...primaryKey);
 	
-	List<T> selectByPage(T entry, Integer startRow, Integer pageSize) throws Exception;
+	List<T> selectPageByStartRow(T entry, Long startRow, Long limit);
 	
-	Integer selectCount(T entry) throws Exception;
+	List<T> selectPageByStartPrimaryKey(T entry, Object startPrimaryKey, Integer limit);
 	
-	List<T> selectAll() throws Exception;
+	long selectCount(T entry);
 	
-	List<T> selectByEntry(T entry) throws Exception;
+	List<T> selectAll();
+	
+	List<T> selectByEntry(T entry);
 
 }

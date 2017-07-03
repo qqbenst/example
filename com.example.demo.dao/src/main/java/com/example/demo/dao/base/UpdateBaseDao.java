@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface UpdateBaseDao<T> {
 	
-	Integer update(T entry);
+	void update(T entry);
 	
-	Integer updateByPrimaryKey(T entry, Object ...primaryKey);
+	void updateByPrimaryKey(T entry, Object ...primaryKey);
 	
-	Integer updateByExample(T entry, T example);
+	void updateByExample(T entry, T example);
 	
-	Integer updateList(List<T> list_t);
+	void updateList(List<T> list_t);
 	
-	Integer updateNotNull(T entry);
+	void updateNotNull(T entry);
 	
-	Integer updateByPrimaryKeyNotNull(T entry, Object ...primaryKey);
+	void updateByPrimaryKeyNotNull(T entry, Object ...primaryKey);
 	
-	Integer updateByExampleNotNull(T entry, T example);
+	void updateByExampleNotNull(T entry, T example);
 	
-	Integer updateListNotNull(List<T> list_t);
+	void updateListNotNull(List<T> list_t);
 	
 
 }
