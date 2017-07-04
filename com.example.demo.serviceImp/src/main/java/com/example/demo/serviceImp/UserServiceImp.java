@@ -18,7 +18,7 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public UserBean findUserById(Long id) {
-		UserModel userModel = userDao.selectById(id);
+		UserModel userModel = userDao.selectByPrimaryKey(id);
 		if (userModel == null) {
 			return null;
 		}
@@ -44,7 +44,7 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public void remove(Long id) {
-		userDao.deleteById(id);
+		userDao.deleteByPrimaryKey(id);
 		return ;
 	}
 
@@ -55,7 +55,7 @@ public class UserServiceImp implements UserService {
 		// bean.setUtime(System.currentTimeMillis());日期更新应该有dao层管理
 		BeanCopier b = BeanCopier.create(UserBean.class, UserModel.class, false);
 		b.copy(bean, userModel, null);
-		userDao.updateById(userModel);
+		userDao.update(userModel);
 		bean.setId(userModel.getId());
 		b = BeanCopier.create(UserModel.class, UserBean.class, false);
 		b.copy(userModel, bean, null);

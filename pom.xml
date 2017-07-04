@@ -17,13 +17,13 @@
 
 	<modules>
 		<module>com.example.demo.dao</module>
-		<module>com.example.demo.daoImp</module>
 		<module>com.example.demo.service</module>
 		<module>com.example.demo.serviceImp</module>
 		<module>com.example.demo.common</module>
 		<module>com.example.demo.config</module>
 		<module>com.example.demo.web</module>
 		<module>com.example.demo.boot</module>
+		<module>com.example.demo.dao.impl.jpa</module>
 	</modules>
 
 	<dependencies>
@@ -47,6 +47,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+		
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -54,7 +60,10 @@
 		<!-- srping end -->
 
 		<!-- 数据库 -->
-
+		<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 		<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
 			<version>0.9.1.2</version> </dependency> -->
 

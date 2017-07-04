@@ -5,11 +5,14 @@
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.example.demo.dao</artifactId>
-  <dependencies>
+  <artifactId>com.example.demo.dao.impl.jpa</artifactId>
+  
+   <dependencies>
   	<dependency>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-data-jpa</artifactId>
+  		<groupId>com.example.demo</groupId>
+  		<artifactId>com.example.demo.dao</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+  
 </project>
