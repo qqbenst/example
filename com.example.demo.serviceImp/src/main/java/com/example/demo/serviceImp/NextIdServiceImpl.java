@@ -22,7 +22,6 @@ public class NextIdServiceImpl implements NextIdService {
 	@Autowired
 	private NextIdDao nextIdDao;
 	
-	@SuppressWarnings("unused")
 	@Override
 	public long findIdPrefix(String system, String subSys, String module, String tableName) {
 		List<NextId> nextIdlist = new ArrayList<NextId>(); 
