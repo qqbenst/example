@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.dao.model.UserModel;
 
-public interface UserDAOSpringDataImpl extends CrudRepository<UserModel, Long>{
+public interface UserDAOSpringDataImpl extends CrudRepository<UserModel, Long> ,QueryByPageRepository<UserModel, Long>{
 
 }
