@@ -19,7 +19,7 @@ public class IdCreatServiceImpl implements IdCreatService {
 	private NextIdService nextIdService;
 	
 	@Override
-	public long nextId(String system, String subSys, String module, String tableName) {
+	public synchronized long nextId(String system, String subSys, String module, String tableName) {
 		
 		String cachedKey = system + subSys + module + tableName;
 		AtomicLong identityAtomicLong = identityMap.get( cachedKey );
