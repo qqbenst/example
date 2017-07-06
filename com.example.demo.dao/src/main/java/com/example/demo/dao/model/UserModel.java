@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Table(name = "`user`")
 @Entity
 public class UserModel {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -55,6 +56,12 @@ public class UserModel {
 
 	public void setUtime(Long utime) {
 		this.utime = utime;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserModel [id=" + id + ", name=" + name + ", password=" + password + ", ctime=" + ctime + ", utime="
+				+ utime + "]";
 	}
 
 }

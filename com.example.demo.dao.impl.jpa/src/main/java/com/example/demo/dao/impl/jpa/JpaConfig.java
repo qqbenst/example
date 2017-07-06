@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.example.demo.dao.impl.jpa")
+@EnableJpaRepositories(basePackages = "com.example.demo.dao.impl.jpa",repositoryBaseClass = BaseRepositoryCustomImpl.class)
 @EntityScan(basePackages = "com.example.demo.dao.model")
 public class JpaConfig {
 }

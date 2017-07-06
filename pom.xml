@@ -24,6 +24,7 @@
 		<module>com.example.demo.web</module>
 		<module>com.example.demo.boot</module>
 		<module>com.example.demo.dao.impl.jpa</module>
+		<module>com.example.demo.dao.imp.mybatis</module>
 	</modules>
 
 	<dependencies>
@@ -98,6 +99,14 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- tools end -->
+		
+		
+		 <dependency>  
+    <groupId>com.googlecode.log4jdbc</groupId>  
+    <artifactId>log4jdbc</artifactId>  
+    <version>1.2</version>  
+</dependency>  
+		
 	</dependencies>
 
 

@@ -13,6 +13,14 @@
   		<artifactId>com.example.demo.dao</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  </dependencies>
+  	<dependency>
+  		<groupId>com.querydsl</groupId>
+  		<artifactId>querydsl-core</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.querydsl</groupId>
+  		<artifactId>querydsl-core</artifactId>
+  	</dependency>
+   </dependencies>
   
 </project>

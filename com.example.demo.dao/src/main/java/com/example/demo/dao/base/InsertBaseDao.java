@@ -4,5 +4,5 @@ public interface InsertBaseDao<T> {
 	
 	void insert(T entry);
     
-	void inserts(T ...entrys);
+	void inserts(@SuppressWarnings("unchecked") T ...entrys);
 }
