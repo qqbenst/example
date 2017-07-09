@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.example.demo.dao.impl.jpa.support.EasyCodeRepositoryFactoryBean;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.example.demo.dao.impl.jpa", repositoryFactoryBeanClass  = EasyCodeRepositoryFactoryBean.class)
+@EnableJpaRepositories(basePackages = "com.example.demo.dao.impl.jpa.springdata", repositoryFactoryBeanClass  = EasyCodeRepositoryFactoryBean.class)
 @EntityScan(basePackages = "com.example.demo.dao.model")
 public class JpaConfig {
 }

@@ -13,14 +13,21 @@
   		<artifactId>com.example.demo.dao</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  	<dependency>
-  		<groupId>com.querydsl</groupId>
-  		<artifactId>querydsl-core</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.querydsl</groupId>
-  		<artifactId>querydsl-core</artifactId>
-  	</dependency>
+  		
+<!-- 	  <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-core</artifactId>
+        </dependency>
+    <dependency> 
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-apt</artifactId> 
+        </dependency>
+    <dependency> 
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-jpa</artifactId> 
+        </dependency>
+  	 -->
+  	
    </dependencies>
   
 </project>

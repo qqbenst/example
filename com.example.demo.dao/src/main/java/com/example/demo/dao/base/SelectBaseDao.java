@@ -10,7 +10,7 @@ public interface SelectBaseDao<T> {
 	
 	List<T> selectPageByStartRow(T entry, Long startRow, Long limit);
 	
-	List<T> selectPageByStartPrimaryKey(T entry, Object startPrimaryKey, Integer limit);
+	List<T> selectPageByStartPrimaryKey(T entry, Integer limit);
 	
 	long selectCount(T entry);
 	

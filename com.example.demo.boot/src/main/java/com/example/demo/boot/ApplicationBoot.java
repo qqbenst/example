@@ -11,7 +11,7 @@ import net.sf.cglib.core.DebuggingClassWriter;
 public class ApplicationBoot {
 	
 	 public static void main(String[] args) throws Exception {
-		 	System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "E://cjlib/");
+		// 	System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "E://cjlib/");
 		 	
 	        SpringApplication.run(ApplicationBoot.class, args);
 	    }

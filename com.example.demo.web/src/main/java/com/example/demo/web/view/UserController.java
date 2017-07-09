@@ -29,7 +29,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public UserBean findByid(@PathVariable Long id){
-		System.out.println(id);
 		return userService.findUserById(id);
 	}
 	
@@ -52,9 +51,15 @@ public class UserController {
 		return true;
 	}
 	@ApiOperation(value="更新用户详细信息", notes="更新用户详细信息")
+	@ApiImplicitParam(name = "userParam", value = "用户信息", required = true, dataType = "UserParam")
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public UserBean modify(@RequestParam UserBean userBean){
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public UserBean put(@PathVariable Long id,
+			@RequestBody UserParam userParam){
+		BeanCopier b = BeanCopier.create(UserParam.class, UserBean.class, false);
+		UserBean userBean = new UserBean();
+		b.copy(userParam, userBean, null);
+		userBean.setId(id);
 		return userService.modify(userBean);	
 	}
 	

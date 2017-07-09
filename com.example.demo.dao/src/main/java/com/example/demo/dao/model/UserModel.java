@@ -6,8 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+
 @Table(name = "`user`")
 @Entity
+@DynamicUpdate(true)
 public class UserModel {
 
 	@Id

@@ -4,8 +4,8 @@ public interface DeleteBaseDao<T> {
 	
 	void deleteByPrimaryKey(Object primaryKey);
 	
-	void deleteByPrimaryKeys(Object ...primaryKey);
+	void deleteByPrimaryKeys(Object ...primaryKeys);
 		
-	void deleteByEntry(T entry);
+	void deleteByEntry(T entity);
 
 }
