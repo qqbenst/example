@@ -3,16 +3,24 @@ package com.example.demo.dao.impl.jpa.support;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.jpa.criteria.predicate.InPredicate;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.convert.QueryByExamplePredicateBuilder;
@@ -23,12 +31,14 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import net.sf.cglib.beans.BeanMap;
+
 @Transactional(readOnly = true)
 public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
 		implements EasyCodeRepository<T, ID> {
 	
-	private static final String ID_MUST_NOT_BE_NULL = "The given id must not be null!";
-
+	private static final String MUST_NOT_BE_NULL = "The given  must not be null!";
+	private final JpaEntityInformation<T, ?> entityInformation;
 
 	private final EntityManager em;
 	
@@ -39,6 +49,7 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 	public EasyCodeRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager em) {
 		super(entityInformation, em);
 		this.em = em;
+		this.entityInformation = entityInformation;
 	}
 
 	@Override
@@ -57,7 +68,7 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 
 		Class<T> probeType = example.getProbeType();
 		TypedQuery<T> query = getQuery(new PrimaryKeyExampleSpecification<T>(example, keySort), probeType, limitable);
-
+		
 		query.setFirstResult(limitable.getOffset());
 		query.setMaxResults(limitable.getLimit());
 		List<T> list = query.getResultList();
@@ -68,23 +79,70 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 	/**
 	 * 目前支持单表更新
 	 */
+	@Transactional
 	@Override
-	public void saveNotNullOneTable(T e, ID id) {
-		
-		Assert.notNull(id, ID_MUST_NOT_BE_NULL);
+	public int updateNotNullOneTable(T e, Example<T> example) {
 
-		CriteriaBuilder cb=em.getCriteriaBuilder();
-		CriteriaUpdate<T> op=cb.createCriteriaUpdate(this.getDomainClass());
-		Root<T> root=op.from(this.getDomainClass());
-	//	root.
-		//这里应该要获取所有的set
-		op.set("", "");
-	//	op.where(cb.equal(, ""));
-		em.createQuery(op).executeUpdate();
+		Assert.notNull(example, MUST_NOT_BE_NULL);
+		BeanMap beanMap = BeanMap.create(e);
+		em.clear();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaUpdate<T> op = cb.createCriteriaUpdate(getDomainClass());
+		Root<T> root = op.from(this.getDomainClass());
+
+		// root.
+		// 这里应该要获取所有的set
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, Object>> it = beanMap.entrySet().iterator();
+
+		while (it.hasNext()) {
+			Map.Entry<String, Object> temp = it.next();
+			if (temp.getValue() != null) {
+				op.set(temp.getKey(), temp.getValue());
+			}
+		}
+		Predicate predicate = QueryByExamplePredicateBuilder.getPredicate(root, cb, example);
+		op.where(predicate);
+		return em.createQuery(op).executeUpdate();
+
+	}
+
+	@Override
+	public int updateNotNullOneTable(T t, Iterator<ID> ids) {
+		Assert.notNull(ids, MUST_NOT_BE_NULL);
+		BeanMap beanMap = BeanMap.create(t);
+		em.clear();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaUpdate<T> op = cb.createCriteriaUpdate(getDomainClass());
+		Root<T> root = op.from(this.getDomainClass());
+
+		// root.
+		// 这里应该要获取所有的set
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, Object>> it = beanMap.entrySet().iterator();
+
+		while (it.hasNext()) {
+			Map.Entry<String, Object> temp = it.next();
+			if (temp.getValue() != null) {
+				op.set(temp.getKey(), temp.getValue());
+			}
+		}
+		
+		//ByIdsSpecification<T> specification =new ByIdsSpecification<T>(entityInformation);
+		
+/*		Predicate predicate = new InPredicate<>(cb,ids)
+		op.where(predicate);*/
+	
+		return 11;
 		
 	}
-	
 
+	
+	
 	protected <S extends T> TypedQuery<S> getQuery(Specification<S> spec, Class<S> domainClass, Limitable limitable) {
 
 		Sort sort = limitable == null ? null : limitable.getSort();
@@ -131,6 +189,28 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
+	private static final class ByIdsSpecification<T> implements Specification<T> {
 
+		private final JpaEntityInformation<T, ?> entityInformation;
+
+		ParameterExpression<Iterable> parameter;
+
+		public ByIdsSpecification(JpaEntityInformation<T, ?> entityInformation) {
+			this.entityInformation = entityInformation;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.springframework.data.jpa.domain.Specification#toPredicate(javax.persistence.criteria.Root, javax.persistence.criteria.CriteriaQuery, javax.persistence.criteria.CriteriaBuilder)
+		 */
+		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+			Path<?> path = root.get(entityInformation.getIdAttribute());
+			parameter = cb.parameter(Iterable.class);
+			return path.in(parameter);
+		}
+	}
+	
 
 }

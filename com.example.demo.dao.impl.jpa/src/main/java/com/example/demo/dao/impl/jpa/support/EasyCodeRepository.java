@@ -2,6 +2,7 @@ package com.example.demo.dao.impl.jpa.support;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,8 @@ public interface EasyCodeRepository<T, ID extends Serializable> extends  JpaRepo
 	
 	Collection<T> limit(Example<T> example, Limitable limitable, OffsetPrimaryKeySort keySort);
 	
-	void saveNotNullOneTable(T t, ID id);
-
+	int updateNotNullOneTable(T t, Example<T> example);
+	
+	int updateNotNullOneTable(T t, Iterator<ID> ids);
+	
 }

@@ -88,31 +88,26 @@ public class UserDAOImpl implements UserDao {
 
 
 	}
-
+	
 	@Override
 	public void updateNotNull(UserModel entry) {
-		UserModel userModel = userDAO.findOne(entry.getId());
-		if (entry.getName() != null) {
-			userModel.setName(entry.getName());
-		}
+		assert (entry != null);
+		UserModel model = new UserModel();
 		
-		if(entry.getPassword() !=null){
-			userModel.setPassword(entry.getPassword());
-		}
+		model.setId(entry.getId());
 		
-		userModel.setUtime(System.currentTimeMillis());
+		Example<UserModel> example = Example.of(model);
 		
-		userDAO.save(userModel);
+		entry.setId(null);
+		
+		entry.setUtime(System.currentTimeMillis());
+		
+		userDAO.updateNotNullOneTable(entry,example);
 	}
 
 	@Override
 	public void updateByPrimaryKeyNotNull(UserModel entry, Object... primaryKey) {
-		ExampleMatcher matcher = ExampleMatcher.matching().withIncludeNullValues();
-		Example<UserModel> example = Example.of(entry,matcher);
 		
-		
-		em.createQuery("").executeUpdate();
-
 		
 		// TODO Auto-generated method stub
 
