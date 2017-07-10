@@ -32,11 +32,9 @@ public class EasyCodeRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I e
 
 	private static class MyEasyCodeRepositoryFactoryBean<T, I extends Serializable> extends JpaRepositoryFactory {
 
-		private final EntityManager em;
 
 		public MyEasyCodeRepositoryFactoryBean(EntityManager em) {
 			super(em);
-			this.em = em;
 		}
 
 		// 设置具体的实现类

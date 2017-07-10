@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -72,7 +73,6 @@ public class UserDAOImpl implements UserDao {
 
 	@Override
 	public void updateByPrimaryKey(UserModel entry, Object... primaryKeys) {
-		
 	}
 
 	@Override
@@ -107,6 +107,13 @@ public class UserDAOImpl implements UserDao {
 
 	@Override
 	public void updateByPrimaryKeyNotNull(UserModel entry, Object... primaryKey) {
+		ExampleMatcher matcher = ExampleMatcher.matching().withIncludeNullValues();
+		Example<UserModel> example = Example.of(entry,matcher);
+		
+		
+		em.createQuery("").executeUpdate();
+
+		
 		// TODO Auto-generated method stub
 
 	}

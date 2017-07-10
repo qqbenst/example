@@ -14,5 +14,7 @@ public interface EasyCodeRepository<T, ID extends Serializable> extends  JpaRepo
 	Collection<T> limit(Example<T> example, Limitable limitable);
 	
 	Collection<T> limit(Example<T> example, Limitable limitable, OffsetPrimaryKeySort keySort);
+	
+	void saveNotNullOneTable(T t, ID id);
 
 }

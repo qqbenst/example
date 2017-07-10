@@ -7,5 +7,6 @@ import com.example.demo.dao.model.UserModel;
 
 public interface UserDAOSpringData extends EasyCodeRepository<UserModel, Long>{
 	
-	void deleteByIdIn(List<Long> id);
+	void deleteByIdIn(List<Long> ids);
+	
 }

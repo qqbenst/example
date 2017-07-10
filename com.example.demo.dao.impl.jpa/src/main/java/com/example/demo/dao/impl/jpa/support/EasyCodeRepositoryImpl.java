@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -17,20 +18,27 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.convert.QueryByExamplePredicateBuilder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 @Transactional(readOnly = true)
 public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
 		implements EasyCodeRepository<T, ID> {
+	
+	private static final String ID_MUST_NOT_BE_NULL = "The given id must not be null!";
 
+
+	private final EntityManager em;
+	
 	public EasyCodeRepositoryImpl(Class<T> domainClass, EntityManager em) {
-		super(domainClass, em);
-		// TODO Auto-generated constructor stub
+		this(JpaEntityInformationSupport.getEntityInformation(domainClass, em), em);
 	}
 
-	public EasyCodeRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
-		super(entityInformation, entityManager);
+	public EasyCodeRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager em) {
+		super(entityInformation, em);
+		this.em = em;
 	}
 
 	@Override
@@ -56,6 +64,26 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 		return list != null ? list : Collections.<T>emptyList();
 	}
 
+	
+	/**
+	 * 目前支持单表更新
+	 */
+	@Override
+	public void saveNotNullOneTable(T e, ID id) {
+		
+		Assert.notNull(id, ID_MUST_NOT_BE_NULL);
+
+		CriteriaBuilder cb=em.getCriteriaBuilder();
+		CriteriaUpdate<T> op=cb.createCriteriaUpdate(this.getDomainClass());
+		Root<T> root=op.from(this.getDomainClass());
+	//	root.
+		//这里应该要获取所有的set
+		op.set("", "");
+	//	op.where(cb.equal(, ""));
+		em.createQuery(op).executeUpdate();
+		
+	}
+	
 
 	protected <S extends T> TypedQuery<S> getQuery(Specification<S> spec, Class<S> domainClass, Limitable limitable) {
 
@@ -81,7 +109,7 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
 			Predicate predicate = QueryByExamplePredicateBuilder.getPredicate(root, cb, example);
-
+			
 			return predicate;
 		}
 	}
@@ -98,8 +126,11 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 
 		@Override
 		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+			
 			return PrimaryKeyPredicateBuilder.getPredicate(root, cb, example, keySort);
 		}
 	}
+
+
 
 }

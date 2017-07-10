@@ -54,6 +54,7 @@ public class UserServiceImp implements UserService {
 		UserModel userModel = userDao.selectByPrimaryKey(bean.getId());
 		// bean.setUtime(System.currentTimeMillis());日期更新应该有dao层管理
 		BeanCopier b = BeanCopier.create(UserBean.class, UserModel.class, false);
+		
 		b.copy(bean, userModel, null);
 		userDao.update(userModel);
 		//bean.setId(userModel.getId());
