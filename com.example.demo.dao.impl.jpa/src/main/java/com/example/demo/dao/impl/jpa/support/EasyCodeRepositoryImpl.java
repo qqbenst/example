@@ -6,11 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,7 +16,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.jpa.criteria.predicate.InPredicate;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.convert.QueryByExamplePredicateBuilder;
@@ -103,6 +98,7 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 				op.set(temp.getKey(), temp.getValue());
 			}
 		}
+		
 		Predicate predicate = QueryByExamplePredicateBuilder.getPredicate(root, cb, example);
 		op.where(predicate);
 		return em.createQuery(op).executeUpdate();
@@ -117,8 +113,10 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaUpdate<T> op = cb.createCriteriaUpdate(getDomainClass());
-		Root<T> root = op.from(this.getDomainClass());
+		Root<T> root = op.from(getDomainClass());
 
+		
+		
 		// root.
 		// 这里应该要获取所有的set
 
@@ -131,14 +129,33 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 				op.set(temp.getKey(), temp.getValue());
 			}
 		}
+		Predicate predicate = null;
 		
-		//ByIdsSpecification<T> specification =new ByIdsSpecification<T>(entityInformation);
+		if (!entityInformation.hasCompositeId()) {
+			Path<?> path = root.get(entityInformation.getIdAttribute());
+			predicate = cb.in(path).in(ids);
+		}
 		
-/*		Predicate predicate = new InPredicate<>(cb,ids)
-		op.where(predicate);*/
-	
-		return 11;
 		
+		
+		Class<?> ID = entityInformation.getIdType();
+		predicate = predicate.in(ids);
+		System.out.println(ID.getName());
+//		Path<?> path = root.get(entityInformation.getIdAttribute());
+		
+	/*	@SuppressWarnings("rawtypes")
+		ParameterExpression<Iterable> parameter = cb.parameter(Iterable.class);
+		Predicate predicate = path.in(parameter);
+		
+		
+		ByIdsSpecification<T> specification =new ByIdsSpecification<T>(entityInformation);
+		
+		predicate = specification.toPredicate(root, null, cb);*/
+/*		Predicate predicate = new InPredicate<>(cb,ids)*/
+		
+		op.where(predicate.in(ids));
+		
+		return em.createQuery(op).executeUpdate();
 	}
 
 	
@@ -189,7 +206,7 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
+ 	@SuppressWarnings("rawtypes")
 	private static final class ByIdsSpecification<T> implements Specification<T> {
 
 		private final JpaEntityInformation<T, ?> entityInformation;
@@ -200,10 +217,6 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 			this.entityInformation = entityInformation;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see org.springframework.data.jpa.domain.Specification#toPredicate(javax.persistence.criteria.Root, javax.persistence.criteria.CriteriaQuery, javax.persistence.criteria.CriteriaBuilder)
-		 */
 		public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
 			Path<?> path = root.get(entityInformation.getIdAttribute());
@@ -211,6 +224,6 @@ public class EasyCodeRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 			return path.in(parameter);
 		}
 	}
-	
+	 
 
 }

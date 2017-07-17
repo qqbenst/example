@@ -23,18 +23,23 @@
   		<artifactId>com.example.demo.serviceImp</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  	<dependency>
+<!--   	<dependency>
   		<groupId>com.example.demo</groupId>
   		<artifactId>com.example.demo.dao.impl.jpa</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  	
+  	 -->
   			
 		 <dependency>  
     <groupId>com.googlecode.log4jdbc</groupId>  
     <artifactId>log4jdbc</artifactId>  
     <version>1.2</version>  
-	</dependency>  
-  	
+	</dependency>
+
+		 <dependency>
+		 	<groupId>com.example.demo.dao.imp.mybatis</groupId>
+		 	<artifactId>com.example.demo.dao.imp.mybatis</artifactId>
+		 	<version>0.0.1-SNAPSHOT</version>
+		 </dependency>
   </dependencies> 
 </project>

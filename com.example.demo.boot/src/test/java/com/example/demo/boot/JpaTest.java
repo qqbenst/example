@@ -21,13 +21,14 @@ public class JpaTest {
 	@Test
 	public void test() {
 		UserModel userModel = new UserModel();
-		userModel.setName("1");
-		userModel.setId(1L);
-		System.out.println(userDao.selectPageByStartPrimaryKey(userModel, 10));
+		userModel.setName("12345");
+		//userModel.setId(1L);
+	//	System.out.println(userDao.selectPageByStartPrimaryKey(userModel, 10));
 		//System.out.println(userDao.selectPageByStartRow(userModel, 3L, 4L));
 		Long [] longs = new Long[]{
 			1L,2L,3L,4L,5L
 		};
+		userDao.updateByPrimaryKeyNotNull(userModel, longs);
 	//	System.out.println(userDao.selectByPrimaryKeys(longs));
 	}
 

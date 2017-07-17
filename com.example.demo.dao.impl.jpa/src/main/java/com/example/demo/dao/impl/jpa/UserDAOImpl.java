@@ -2,6 +2,7 @@ package com.example.demo.dao.impl.jpa;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -107,9 +107,8 @@ public class UserDAOImpl implements UserDao {
 
 	@Override
 	public void updateByPrimaryKeyNotNull(UserModel entry, Object... primaryKey) {
-		
-		
-		// TODO Auto-generated method stub
+		Iterator<Long> iterator = Arrays.asList((Long[])primaryKey).iterator();
+		userDAO.updateNotNullOneTable(entry,iterator);
 
 	}
 
