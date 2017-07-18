@@ -81,13 +81,13 @@ public class UserDAOImpl implements UserDao {
 
 	}
 
-	@Override
+/*	@Override
 	public void updateList(List<UserModel> userModels) {
 		userModels.forEach(e -> e.setUtime(System.currentTimeMillis()));
 		userDAO.save(userModels);
 
 
-	}
+	}*/
 	
 	@Override
 	public void updateNotNull(UserModel entry) {
@@ -117,7 +117,7 @@ public class UserDAOImpl implements UserDao {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
+/*	@Override
 	public void updateListNotNull(List<UserModel> userModels) {
 		List<UserModel> models = userDAO.findAll(userModels.stream().map(UserModel::getId).collect(Collectors.toList()));
 		long time = System.currentTimeMillis();
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDao {
 		
 		userDAO.save(userModels);
 
-	}
+	}*/
 
 	@Override
 	public UserModel selectByPrimaryKey(Object primaryKey) {
@@ -151,7 +151,7 @@ public class UserDAOImpl implements UserDao {
 	}
 
 	@Override
-	public List<UserModel> selectPageByStartRow(UserModel entry, Long startRow, Long limit) {
+	public List<UserModel> selectListByStartRow(UserModel entry, Long startRow, Long limit) {
 		if (entry == null) {
 			entry = new UserModel();
 		}
@@ -162,7 +162,7 @@ public class UserDAOImpl implements UserDao {
 	}
 
 	@Override
-	public List<UserModel> selectPageByStartPrimaryKey(UserModel entry, Integer limit) {
+	public List<UserModel> selectListByStartPrimaryKey(UserModel entry, Integer limit) {
 		if (entry == null) {
 			entry = new UserModel();
 		}

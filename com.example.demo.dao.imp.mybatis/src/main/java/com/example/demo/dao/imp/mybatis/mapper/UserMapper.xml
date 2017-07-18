@@ -19,7 +19,35 @@
     	utime
   </sql>
   
-  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <sql id="Example_Where_Clause" >
+    AND
+    <if test="example.id != null">  
+    id  = #{ example.id,jdbcType=BIGINT } 
+    </if>  
+    AND
+    <if test="example.name != null">  
+    `name`  = #{ example.name,jdbcType=VARCHAR } 
+    </if>  
+    AND
+    <if test="example.password != null">  
+    `password`  = #{ example.password,jdbcType=VARCHAR } 
+    </if>  
+    AND
+    <if test="example.status != null">  
+    `status`  = #{ example.status,jdbcType=TINYINT } 
+    </if>  
+    AND
+    <if test="example.ctime != null">  
+    ctime  = #{ example.ctime,jdbcType=BIGINT } 
+    </if>  
+    AND
+    <if test="example.utime != null">  
+    utime  = #{ example.utime,jdbcType=BIGINT } 
+    </if>  
+  </sql>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from user
@@ -27,91 +55,83 @@
     	id = #{ id,jdbcType=BIGINT }
   </select>
   
-  <select id="getList" resultMap="BaseResultMap" parameterType="com.example.demo.dao.model.UserModel" >
+   <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user 
+    <trim prefix="WHERE" prefixOverrides="AND|OR">  
+    id in
+    <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">#{id}
+    </foreach>
+	</trim>
+  </select>
+  
+  <select id="selectByentity" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from user
-    <where> 
-	    <if test="id != null" >
-	       and id = #{ id,jdbcType=BIGINT }
-	    </if>
-	    <if test="name != null" >
-	       and `name` = #{ name,jdbcType=VARCHAR }
-	    </if>
-	    <if test="password != null" >
-	       and `password` = #{ password,jdbcType=VARCHAR }
-	    </if>
-	    <if test="status != null" >
-	       and `status` = #{ status,jdbcType=TINYINT }
-	    </if>
-	    <if test="ctime != null" >
-	       and ctime = #{ ctime,jdbcType=BIGINT }
-	    </if>
-	    <if test="utime != null" >
-	       and utime = #{ utime,jdbcType=BIGINT }
-	    </if>
-    </where>
+ 	<where>
+      <include refid="Example_Where_Clause" /> 
+	</where> 
   </select>
   
-  <select id="getTotal" resultType="java.lang.Long"  parameterType="com.example.demo.dao.model.UserModel" >
+  <select id="selectListByStartRow" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  	<where>
+      <include refid="Example_Where_Clause" /> 
+	</where>
+	limit
+		 #{offset}, #{limit}
+  </select>
+  
+  
+  <select id="selectListByStartPrimaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  	<where>
+    AND    id  >= #{ example.id,jdbcType=BIGINT } 
+    AND
+    <if test="name != null">  
+    `name`  = #{ example.name,jdbcType=VARCHAR } 
+    </if>
+    AND
+    <if test="password != null">  
+    `password`  = #{ example.password,jdbcType=VARCHAR } 
+    </if>
+    AND
+    <if test="status != null">  
+    `status`  = #{ example.status,jdbcType=TINYINT } 
+    </if>
+    AND
+    <if test="ctime != null">  
+    ctime  = #{ example.ctime,jdbcType=BIGINT } 
+    </if>
+    AND
+    <if test="utime != null">  
+    utime  = #{ example.utime,jdbcType=BIGINT } 
+    </if>
+	</where>
+	limit
+		0, #{limit}
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Long">
     select count(1) from user 
     <where> 
-	    <if test="id != null" >
-	       and id = #{ id,jdbcType=BIGINT }
-	    </if>
-	    <if test="name != null" >
-	       and `name` = #{ name,jdbcType=VARCHAR }
-	    </if>
-	    <if test="password != null" >
-	       and `password` = #{ password,jdbcType=VARCHAR }
-	    </if>
-	    <if test="status != null" >
-	       and `status` = #{ status,jdbcType=TINYINT }
-	    </if>
-	    <if test="ctime != null" >
-	       and ctime = #{ ctime,jdbcType=BIGINT }
-	    </if>
-	    <if test="utime != null" >
-	       and utime = #{ utime,jdbcType=BIGINT }
-	    </if>
+      <include refid="Example_Where_Clause" />  
     </where>
   </select>
   
-  <select id="getPage" resultMap="BaseResultMap" >
-	    select 
-	    <include refid="Base_Column_List" />
-	    from user
-	    <where> 
-	    	<if test="queryParam  !=  null" >
-		        <if test="queryParam.id != null" >
-		           and id = #{ queryParam.id,jdbcType=BIGINT }
-		        </if>
-		        <if test="queryParam.name != null" >
-		           and `name` = #{ queryParam.name,jdbcType=VARCHAR }
-		        </if>
-		        <if test="queryParam.password != null" >
-		           and `password` = #{ queryParam.password,jdbcType=VARCHAR }
-		        </if>
-		        <if test="queryParam.status != null" >
-		           and `status` = #{ queryParam.status,jdbcType=TINYINT }
-		        </if>
-		        <if test="queryParam.ctime != null" >
-		           and ctime = #{ queryParam.ctime,jdbcType=BIGINT }
-		        </if>
-		        <if test="queryParam.utime != null" >
-		           and utime = #{ queryParam.utime,jdbcType=BIGINT }
-		        </if>
-	    	</if>
-	    </where>
-		limit
-		#{offset},#{rows}
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
   </select>
   
-  <delete id="delete" parameterType="java.lang.Long" >
-    update user set status = 0 
-    where 
-    	id = #{ id,jdbcType=BIGINT }
-  </delete>
   
   <insert id="insert" parameterType="com.example.demo.dao.model.UserModel">
     insert into user
@@ -133,7 +153,155 @@
     </trim>
   </insert>
   
+  <insert id="insertByNotNull" parameterType="com.example.demo.dao.model.UserModel">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+    	id,
+      </if>
+      <if test="name != null" >
+    	`name`,
+      </if>
+      <if test="password != null" >
+    	`password`,
+      </if>
+      <if test="status != null" >
+    	`status`,
+      </if>
+      <if test="ctime != null" >
+    	ctime,
+      </if>
+      <if test="utime != null" >
+    	utime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+	    #{ id,jdbcType=BIGINT },
+	  </if>
+      <if test="name != null" >
+	    #{ name,jdbcType=VARCHAR },
+	  </if>
+      <if test="password != null" >
+	    #{ password,jdbcType=VARCHAR },
+	  </if>
+      <if test="status != null" >
+	    #{ status,jdbcType=TINYINT },
+	  </if>
+      <if test="ctime != null" >
+	    #{ ctime,jdbcType=BIGINT },
+	  </if>
+      <if test="utime != null" >
+	    #{ utime,jdbcType=BIGINT },
+	  </if>
+    </trim>
+  </insert>
+  
+  <insert id="inserts">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    	id,
+    	`name`,
+    	`password`,
+    	`status`,
+    	ctime,
+    	utime,
+    </trim>
+      values 
+     <foreach collection="list" item="item" index="index" separator="," >  
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+	    #{ item.id,jdbcType=BIGINT },
+	  </if>
+      <if test="name != null" >
+	    #{ item.name,jdbcType=VARCHAR },
+	  </if>
+      <if test="password != null" >
+	    #{ item.password,jdbcType=VARCHAR },
+	  </if>
+      <if test="status != null" >
+	    #{ item.status,jdbcType=TINYINT },
+	  </if>
+      <if test="ctime != null" >
+	    #{ item.ctime,jdbcType=BIGINT },
+	  </if>
+      <if test="utime != null" >
+	    #{ item.utime,jdbcType=BIGINT },
+	  </if>
+    </trim> 
+    </foreach>  
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete user 
+    where 
+    	id = #{ id,jdbcType=BIGINT }
+  </delete>
+  
+  <delete id="deleteByPrimaryKeys" >
+    delete user 
+    where 
+   id in
+   <foreach collection="list" item="id" index="index"
+       open="(" close=")" separator=",">#{id}
+   </foreach>
+  </delete>
+  
+  <delete id="deleteByentity" >
+    delete user 
+    where 
+    <include refid="Example_Where_Clause" /> 
+  </delete>
+  
+  
   <update id="update" parameterType="com.example.demo.dao.model.UserModel" >
+    update user
+    <set >
+	    `name` = #{ name,jdbcType=VARCHAR },
+	    `password` = #{ password,jdbcType=VARCHAR },
+	    `status` = #{ status,jdbcType=TINYINT },
+	    ctime = #{ ctime,jdbcType=BIGINT },
+	    utime = #{ utime,jdbcType=BIGINT },
+    </set>
+    where 
+    	id = #{ id,jdbcType=BIGINT }
+  </update>
+  
+  
+    <update id="updateByPrimaryKeys">
+    update user
+    <set >
+	    `name` = #{ entity.name,jdbcType=VARCHAR },
+	    `password` = #{ entity.password,jdbcType=VARCHAR },
+	    `status` = #{ entity.status,jdbcType=TINYINT },
+	    ctime = #{ entity.ctime,jdbcType=BIGINT },
+	    utime = #{ entity.utime,jdbcType=BIGINT },
+    </set>
+    where 
+   id in
+   <foreach collection="primaryKeys" item="id" index="index"
+       open="(" close=")" separator=",">#{id}
+   </foreach>
+  </update>
+  
+  
+  <update id="updateByExample">
+    update user
+    <set >
+	    `name` = #{ entity.name,jdbcType=VARCHAR },
+	    `password` = #{ entity.password,jdbcType=VARCHAR },
+	    `status` = #{ entity.status,jdbcType=TINYINT },
+	    ctime = #{ entity.ctime,jdbcType=BIGINT },
+	    utime = #{ entity.utime,jdbcType=BIGINT },
+    </set>
+	<where> 
+      <include refid="Example_Where_Clause" />  
+    </where>
+  </update>
+  
+  
+  
+  <update id="updateNotNull" parameterType="com.example.demo.dao.model.UserModel" >
     update user
     <set >
 	    <if test="name != null" >
@@ -155,5 +323,58 @@
     where 
     	id = #{ id,jdbcType=BIGINT }
   </update>
+  
+  
+   <update id="updateByPrimaryKeyNotNull">
+    update user
+    <set >
+        <if test="entity.name != null" >
+	    `name` = #{ entity.name,jdbcType=VARCHAR },
+	    </if>
+        <if test="entity.password != null" >
+	    `password` = #{ entity.password,jdbcType=VARCHAR },
+	    </if>
+        <if test="entity.status != null" >
+	    `status` = #{ entity.status,jdbcType=TINYINT },
+	    </if>
+        <if test="entity.ctime != null" >
+	    ctime = #{ entity.ctime,jdbcType=BIGINT },
+	    </if>
+        <if test="entity.utime != null" >
+	    utime = #{ entity.utime,jdbcType=BIGINT },
+	    </if>
+    </set>
+    where 
+   id in
+   <foreach collection="primaryKeys" item="id" index="index"
+       open="(" close=")" separator=",">#{id}
+   </foreach>
+  </update>
+  
+  
+  <update id="updateByExampleNotNull">
+    update user
+    <set >
+      	<if test="entity.name != null" >
+	    `name` = #{ entity.name,jdbcType=VARCHAR },
+	    </if>
+      	<if test="entity.password != null" >
+	    `password` = #{ entity.password,jdbcType=VARCHAR },
+	    </if>
+      	<if test="entity.status != null" >
+	    `status` = #{ entity.status,jdbcType=TINYINT },
+	    </if>
+      	<if test="entity.ctime != null" >
+	    ctime = #{ entity.ctime,jdbcType=BIGINT },
+	    </if>
+      	<if test="entity.utime != null" >
+	    utime = #{ entity.utime,jdbcType=BIGINT },
+	    </if>
+    </set>
+	<where> 
+      <include refid="Example_Where_Clause" />  
+    </where>
+  </update>
  
+
 </mapper>

@@ -8,9 +8,9 @@ public interface SelectBaseDao<T> {
 	
 	List<T> selectByPrimaryKeys(Object ...primaryKey);
 	
-	List<T> selectPageByStartRow(T entry, Long startRow, Long limit);
+	List<T> selectListByStartRow(T entry, Long startRow, Long limit);
 	
-	List<T> selectPageByStartPrimaryKey(T entry, Integer limit);
+	List<T> selectListByStartPrimaryKey(T entry, Integer limit);
 	
 	long selectCount(T entry);
 	
