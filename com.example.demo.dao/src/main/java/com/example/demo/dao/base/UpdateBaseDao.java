@@ -1,19 +1,17 @@
 package com.example.demo.dao.base;
 
-import java.util.List;
-
 public interface UpdateBaseDao<T> {
 	
-	void update(T entry);
+	int update(T entry);
 	
-	void updateByPrimaryKey(T entry, Object ...primaryKey);
+	int updateByPrimaryKeys(T entry, Object ...primaryKey);
 	
-	void updateByExample(T entry, T example);
+	int updateByExample(T entry, T example);
 		
-	void updateNotNull(T entry);
+	int updateNotNull(T entry);
 	
-	void updateByPrimaryKeyNotNull(T entry, Object ...primaryKey);
+	int updateByPrimaryKeysNotNull(T entry, Object ...primaryKeys);
 	
-	void updateByExampleNotNull(T entry, T example);	
+	int updateByExampleNotNull(T entry, T example);	
 
 }

@@ -21,17 +21,18 @@ import com.example.demo.dao.impl.jpa.support.OffsetPrimaryKeySort;
 import com.example.demo.dao.model.UserModel;
 
 @Repository
-public class UserDAOImpl implements UserDao {
+public class UserDAOImpl {
 
-	@Autowired
+/*	@Autowired
 	UserDAOSpringData userDAO;
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
-	public void deleteByPrimaryKey(Object primaryKey) {
+	public int deleteByPrimaryKey(Object primaryKey) {
 		 UserModel userModel = userDAO.findOne((Long) primaryKey);
-		userDAO.delete(userModel.getId());
+		 userDAO.delete(userModel.getId());
+		 return 0;
 	}
 
 	@Override
@@ -81,13 +82,13 @@ public class UserDAOImpl implements UserDao {
 
 	}
 
-/*	@Override
+	@Override
 	public void updateList(List<UserModel> userModels) {
 		userModels.forEach(e -> e.setUtime(System.currentTimeMillis()));
 		userDAO.save(userModels);
 
 
-	}*/
+	}
 	
 	@Override
 	public void updateNotNull(UserModel entry) {
@@ -117,7 +118,7 @@ public class UserDAOImpl implements UserDao {
 		// TODO Auto-generated method stub
 	}
 
-/*	@Override
+	@Override
 	public void updateListNotNull(List<UserModel> userModels) {
 		List<UserModel> models = userDAO.findAll(userModels.stream().map(UserModel::getId).collect(Collectors.toList()));
 		long time = System.currentTimeMillis();
@@ -137,7 +138,7 @@ public class UserDAOImpl implements UserDao {
 		
 		userDAO.save(userModels);
 
-	}*/
+	}
 
 	@Override
 	public UserModel selectByPrimaryKey(Object primaryKey) {
@@ -186,5 +187,5 @@ public class UserDAOImpl implements UserDao {
 	public List<UserModel> selectByEntry(UserModel entry) {
 		Example<UserModel> example = Example.of(entry);
 		return userDAO.findAll(example);
-	}
+	}*/
 }

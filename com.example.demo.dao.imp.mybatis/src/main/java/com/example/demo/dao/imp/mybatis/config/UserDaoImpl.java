@@ -3,7 +3,7 @@
  * Since 2015 - 2017
  */
 
-package com.example.demo.dao.imp.mybatis;
+package com.example.demo.dao.imp.mybatis.config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,21 +22,21 @@ public class UserDaoImpl implements UserDao{
 	UserMapper userMapper;
 
 	@Override
-	public void deleteByPrimaryKey(Object primaryKey) {
+	public int deleteByPrimaryKey(Object primaryKey) {
 		assert (primaryKey != null);
-		userMapper.deleteByPrimaryKey((Long) primaryKey);
+		return userMapper.deleteByPrimaryKey((Long) primaryKey);
 	}
 
 	@Override
-	public void deleteByPrimaryKeys(Object... primaryKeys) {
+	public int deleteByPrimaryKeys(Object... primaryKeys) {
 		assert (primaryKeys != null);
-		userMapper.deleteByPrimaryKeys(Arrays.asList((Long[]) primaryKeys));
+		return userMapper.deleteByPrimaryKeys(Arrays.asList((Long[]) primaryKeys));
 	}
 
 	@Override
-	public void deleteByEntry(UserModel entity) {
+	public int deleteByEntry(UserModel entity) {
 		assert (entity != null);
-		userMapper.deleteByEntry(entity);
+		return userMapper.deleteByEntry(entity);
 	}
 
 	@Override
@@ -52,44 +52,42 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public void update(UserModel entity) {
+	public int update(UserModel entity) {
 		assert (entity != null);
-		userMapper.insert(entity);
+		return userMapper.update(entity);
 	}
 
 	@Override
-	public void updateByPrimaryKey(UserModel entity, Object... primaryKeys) {
+	public int updateByPrimaryKeys(UserModel entity, Object... primaryKeys) {
 		assert (entity != null && primaryKeys != null);
-		userMapper.updateByPrimaryKeys(entity, Arrays.asList((Long[]) primaryKeys));
+		return userMapper.updateByPrimaryKeys(entity, Arrays.asList((Long[]) primaryKeys));
 
 	}
 
 	@Override
-	public void updateByExample(UserModel entity, UserModel example) {
+	public int updateByExample(UserModel entity, UserModel example) {
 		assert (entity != null && example != null);
-		userMapper.updateByExample(entity, example);	
+		return userMapper.updateByExample(entity, example);	
 	}
 
-
 	@Override
-	public void updateNotNull(UserModel entity) {
+	public int updateNotNull(UserModel entity) {
 		assert (entity != null);
-		userMapper.updateNotNull(entity);
+		return userMapper.updateNotNull(entity);
 	}
 
 	@Override
-	public void updateByPrimaryKeyNotNull(UserModel entity, Object... primaryKeys) {
+	public int updateByPrimaryKeysNotNull(UserModel entity, Object... primaryKeys) {
 		assert (entity != null && primaryKeys != null);
-		userMapper.updateByPrimaryKeyNotNull(entity, Arrays.asList((Long[]) primaryKeys));
+		return userMapper.updateByPrimaryKeyNotNull(entity, Arrays.asList((Long[]) primaryKeys));
 		
 	}
 
 	@Override
-	public void updateByExampleNotNull(UserModel entity, UserModel example) {
+	public int updateByExampleNotNull(UserModel entity, UserModel example) {
 		assert (entity != null && example != null);
-		userMapper.updateByExampleNotNull(entity, example);	
+		return userMapper.updateByExampleNotNull(entity, example);	
 	}
-
 
 	@Override
 	public UserModel selectByPrimaryKey(Object primaryKey) {

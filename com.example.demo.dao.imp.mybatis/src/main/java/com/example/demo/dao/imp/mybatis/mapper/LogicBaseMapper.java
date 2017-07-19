@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 public interface LogicBaseMapper<T, ID> {
 
-	public void deleteByPrimaryKey(ID primaryKey);
+	public int deleteByPrimaryKey(ID primaryKey);
 
-	public void deleteByPrimaryKeys(List<ID> primaryKeys);
+	public int deleteByPrimaryKeys(List<ID> primaryKeys);
 
-	public void deleteByEntry(@Param("entity")T entity);
+	public int deleteByEntry(@Param("entity")T entity);
 
 	public void insert(T entry);
 	
@@ -18,17 +18,17 @@ public interface LogicBaseMapper<T, ID> {
 
 	public void inserts(List<T> entries);
 		
-	public void update(T entry);
+	public int update(T entry);
 
-	public void updateByPrimaryKeys(@Param("entity")T entry, @Param("primaryKeys")List<ID> primaryKeys);
+	public int updateByPrimaryKeys(@Param("entity")T entry, @Param("primaryKeys")List<ID> primaryKeys);
 
-	public void updateByExample(@Param("entity")T entry, @Param("example")T example);
+	public int updateByExample(@Param("entity")T entry, @Param("example")T example);
 
-	public void updateNotNull(@Param("entity")T entry);
+	public int updateNotNull(@Param("entity")T entry);
 
-	public void updateByPrimaryKeyNotNull(@Param("entity")T entry,  @Param("primaryKeys")List<ID> primaryKeys);
+	public int updateByPrimaryKeyNotNull(@Param("entity")T entry,  @Param("primaryKeys")List<ID> primaryKeys);
 
-	public void updateByExampleNotNull(@Param("entity")T entry, @Param("example")T example);
+	public int updateByExampleNotNull(@Param("entity")T entry, @Param("example")T example);
 
 	public T selectByPrimaryKey(ID primaryKey);
 
