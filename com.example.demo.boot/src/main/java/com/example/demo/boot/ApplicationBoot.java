@@ -2,6 +2,7 @@ package com.example.demo.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import net.sf.cglib.core.DebuggingClassWriter;
