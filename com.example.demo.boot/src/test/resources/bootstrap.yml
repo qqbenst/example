@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: example
+  cloud:
+      config:
+        profile: dev 
+        uri: http://config.easy.code.com:8114/
+    

@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: example
-  cloud:
-      config:
-        uri: http://config.easy.code.com:8114
-    
