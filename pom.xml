@@ -25,6 +25,9 @@
 		<module>com.example.demo.boot</module>
 		<module>com.example.demo.dao.impl.jpa</module>
 		<module>com.example.demo.dao.imp.mybatis</module>
+		<module>com.example.demo.rfc.dubbo</module>
+		<module>com.example.demo.rpc.service</module>
+		<module>com.example.demo.rpc.client</module>
 	</modules>
 
 	  <dependencyManagement>

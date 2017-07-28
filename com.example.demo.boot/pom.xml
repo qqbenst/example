@@ -43,6 +43,7 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	 -->
+  	 <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
   			
 		 <dependency>  
     <groupId>com.googlecode.log4jdbc</groupId>  
