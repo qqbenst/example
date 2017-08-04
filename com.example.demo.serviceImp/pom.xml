@@ -17,5 +17,10 @@
   		<artifactId>com.example.demo.dao</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+   	<dependency>
+        <groupId>io.dubbo.springboot</groupId>
+        <artifactId>spring-boot-starter-dubbo</artifactId>
+        <version>1.0.0</version>
+    </dependency>
   </dependencies>
 </project>

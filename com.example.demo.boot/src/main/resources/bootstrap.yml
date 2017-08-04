@@ -6,3 +6,4 @@ spring:
         profile: dev 
         uri: http://config.easy.code.com:8114/
     
+    

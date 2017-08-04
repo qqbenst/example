@@ -1,6 +1,5 @@
 package com.example.demo.dao.model;
 
-import javax.persistence.Entity;
 /*import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,7 +8,6 @@ import javax.persistence.Table;*/
 
 /*@Table(name = "`user`")
 */
-@Entity
 public class UserModel {
 /*
 	@Id

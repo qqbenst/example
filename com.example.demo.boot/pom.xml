@@ -1,65 +1,62 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.example.demo</groupId>
-    <artifactId>demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>com.example.demo.boot</artifactId>
-  
-    
-  
-  
-  
-  <dependencies>
-  	<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
-        </dependency>
-    
-    <dependency>
-	  <groupId>org.springframework.boot</groupId>
-	  <artifactId>spring-boot-starter-actuator</artifactId>
-	</dependency>
-  
-  	<dependency>
-  		<groupId>com.example.demo</groupId>
-  		<artifactId>com.example.demo.web</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.example.demo</groupId>
-  		<artifactId>com.example.demo.config</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.example.demo</groupId>
-  		<artifactId>com.example.demo.serviceImp</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-<!--   	<dependency>
-  		<groupId>com.example.demo</groupId>
-  		<artifactId>com.example.demo.dao.impl.jpa</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	 -->
-  	 <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-  			
-		 <dependency>  
-    <groupId>com.googlecode.log4jdbc</groupId>  
-    <artifactId>log4jdbc</artifactId>  
-    <version>1.2</version>  
-	</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.example.demo</groupId>
+		<artifactId>demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>com.example.demo.boot</artifactId>
 
-		 <dependency>
-		 	<groupId>com.example.demo.dao.imp.mybatis</groupId>
-		 	<artifactId>com.example.demo.dao.imp.mybatis</artifactId>
-		 	<version>0.0.1-SNAPSHOT</version>
-		 </dependency>
-		 <dependency>
-		 	<groupId>com.example.demo.rpc.service</groupId>
-		 	<artifactId>com.example.demo.rpc.service</artifactId>
-		 	<version>0.0.1-SNAPSHOT</version>
-		 </dependency>
-  </dependencies> 
+
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.example.demo</groupId>
+			<artifactId>com.example.demo.web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example.demo</groupId>
+			<artifactId>com.example.demo.config</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.example.demo</groupId>
+			<artifactId>com.example.demo.serviceImp</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.example.demo</groupId> <artifactId>com.example.demo.dao.impl.jpa</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.example.demo.dao.imp.mybatis</groupId>
+			<artifactId>com.example.demo.dao.imp.mybatis</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	  	<dependency>
+			<groupId>com.example.demo.rpc.service</groupId>
+			<artifactId>com.example.demo.rpc.service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency> 
+	</dependencies>
 </project>

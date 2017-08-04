@@ -17,6 +17,8 @@ public class JpaTest {
 
 	@Autowired
 	UserDao userDao;
+	@Autowired
+//	IdSequence idSequence;
 	
 	@Test
 	public void test() {
@@ -25,6 +27,7 @@ public class JpaTest {
 		//userModel.setId(1L);
 	//	System.out.println(userDao.selectPageByStartPrimaryKey(userModel, 10));
 		//System.out.println(userDao.selectPageByStartRow(userModel, 3L, 4L));
+		//System.out.println("mdmdmd"+idSequence.next("test1"));
 		Object [] longs = new Long[]{
 			1L,2L,3L,4L,5L
 		};

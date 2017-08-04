@@ -5,8 +5,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration  
-@PropertySource("dubbo.properties")  
-@ImportResource({ "*.xml" })  
+//@PropertySource("dubbo.properties")  
+//@ImportResource({ "dubbo.xml" })  
 public class DubboConfig {
 
 }
